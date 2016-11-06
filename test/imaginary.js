@@ -133,4 +133,23 @@ suite('Imaginary', function () {
         done(err)
       })
   })
+
+  test('#objectives', function (done) {
+    Imaginary('./test/fixtures/test.jpg')
+      .server('http://localhost:8088')
+      .objectives({
+        crop: {
+          width: 400
+        },
+        resize: {
+          width: 90
+        },
+        rotate: {
+          rotate: 90
+        }
+      }).then((res) => {
+        console.log(res)
+        done()
+      })
+  })
 })
