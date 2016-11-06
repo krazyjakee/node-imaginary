@@ -40,7 +40,7 @@ suite('Imaginary', function () {
 
   test('#crop', function (done) {
     Imaginary('./test/fixtures/test.jpg')
-      .server('http://localhost:8088')
+      .server('http://localhost:8088', { timeout: 5000 })
       .crop({ width: 400 })
       .on('response', function (res) {
         var length = 0
