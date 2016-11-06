@@ -40,7 +40,7 @@ suite('Imaginary', function () {
 
   test('#crop', function (done) {
     Imaginary('./test/fixtures/test.jpg')
-      .server('http://localhost:8088', { timeout: 5000 })
+      .server('http://localhost:8088')
       .crop({ width: 400 })
       .on('response', function (res) {
         var length = 0
@@ -131,6 +131,17 @@ suite('Imaginary', function () {
         expect(res.statusCode).to.be.equal(200)
         expect(res.body).to.be.a('string')
         done(err)
+      })
+  })
+
+  test('httpParams', function (done) {
+    Imaginary('./test/fixtures/test.jpg')
+      .server('http://localhost:8088')
+      .httpParams({ timeout: 5000 })
+      .crop({ width: 400 })
+      .on('response', function (res) {
+        expect(res.request.timeout).to.be.equal(5000)
+        done()
       })
   })
 })
